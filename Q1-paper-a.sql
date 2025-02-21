@@ -1,7 +1,7 @@
 CREATE TABLE Artist (
     Art_id VARCHAR2(3) PRIMARY KEY CHECK (Art_id LIKE 'A%'),
     Art_nm VARCHAR2(20) NOT NULL,
-    Art_dob DATE CHECK (Art_dob < DATE '2025-01-01') -- Future date constraint
+    Art_dob DATE CHECK (Art_dob < DATE '2025-01-01')
 );
 
 INSERT INTO Artist (Art_id, Art_nm, Art_dob) VALUES ('A01', 'Suchitra', TO_DATE('15-Jun-1990', 'DD-Mon-YYYY'));

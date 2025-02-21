@@ -1,26 +1,19 @@
 SET SERVEROUTPUT ON;
 
 DECLARE
-    v_Cd_id CD.Cd_id%TYPE := '&Enter_Cd_id';
-    v_Art_id CD.Art_id%TYPE;
-    v_Title CD.Title%TYPE;
-    v_Prize CD.Prize%TYPE;
-    v_Quantity CD.Quantity%TYPE;
-    v_Year CD.Year%TYPE;
+    v_Cd_id CD.Cd_id%TYPE := TRIM(UPPER('&Enter_Cd_id'));
+    v_Record CD%ROWTYPE;
 BEGIN
     -- Fetch the CD details
-    SELECT Art_id, Title, Prize, Quantity, Year
-    INTO v_Art_id, v_Title, v_Prize, v_Quantity, v_Year
-    FROM CD
-    WHERE Cd_id = v_Cd_id;
+    SELECT * INTO v_Record FROM CD WHERE TRIM(UPPER(Cd_id)) = v_Cd_id;
 
-    -- Displaying the output
+    -- Display the output
     DBMS_OUTPUT.PUT_LINE('CD ID       : ' || v_Cd_id);
-    DBMS_OUTPUT.PUT_LINE('Artist ID   : ' || v_Art_id);
-    DBMS_OUTPUT.PUT_LINE('Title       : ' || v_Title);
-    DBMS_OUTPUT.PUT_LINE('Price       : ' || v_Prize);
-    DBMS_OUTPUT.PUT_LINE('Quantity    : ' || v_Quantity);
-    DBMS_OUTPUT.PUT_LINE('Year        : ' || v_Year);
+    DBMS_OUTPUT.PUT_LINE('Artist ID   : ' || v_Record.Art_id);
+    DBMS_OUTPUT.PUT_LINE('Title       : ' || v_Record.Title);
+    DBMS_OUTPUT.PUT_LINE('Price       : ' || v_Record.Prize);
+    DBMS_OUTPUT.PUT_LINE('Quantity    : ' || v_Record.Quantity);
+    DBMS_OUTPUT.PUT_LINE('Year        : ' || v_Record.Year);
 
 EXCEPTION
     WHEN NO_DATA_FOUND THEN
